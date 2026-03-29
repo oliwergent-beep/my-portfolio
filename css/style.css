@@ -1,85 +1,231 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* --- Global Reset & Modern Styles --- */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    text-align: center;
-    background-color: #0f172a; /* Sleek dark background */
-    color: #f8fafc;
+}
+
+:root {
+    /* Color Palette */
+    --bg-color: #0d1117;
+    --card-bg: #161b22;
+    --border-color: #30363d;
+    --text-color: #c9d1d9;
+    --heading-color: #ffffff;
+    --accent-color: #58a6ff; /* Modern Tech Blue */
+    
+    /* Typography */
+    --font-body: 'Inter', sans-serif;
+    --font-heading: 'Syne', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* Background Particle Canvas */
 #particle-canvas {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
-    background: #0d1117; /* Deep professional dark blue/grey */
+    z-index: -2; /* Keeps it behind everything, including borders */
 }
 
-/* Update text and cards to fit the dark background */
-body { color: #c9d1d9; }
-h1, h2, h3 { color: #ffffff; }
-.project { 
-    background: #161b22; 
-    border: 1px solid #30363d; 
-}
-.project h3 { border-bottom: 2px solid #30363d; }
-
-/* Glassmorphism Navigation */
-nav {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(15px);
-    padding: 15px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    font-weight: 800;
 }
 
-.btn {
-    color: white;
-    text-decoration: none;
-    padding: 10px 25px;
-    margin: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 30px;
-    display: inline-block;
+a {
     transition: 0.3s;
 }
 
-.btn:hover { 
-    background: rgba(255, 255, 255, 0.2); 
-    transform: translateY(-2px); 
+/* --- Navigation --- */
+nav {
+    background: rgba(13, 17, 23, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 20px 5%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
 }
 
-header, main, footer { padding: 60px 20px; }
-
-/* Frosted Glass Project Cards */
-.project {
-    max-width: 650px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s;
-}
-
-.project:hover { transform: scale(1.02); }
-
-.project img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-footer a {
-    color: #60a5fa;
+.nav-link {
+    color: var(--text-color);
     text-decoration: none;
+    margin-left: 30px;
+    font-weight: 500;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: var(--heading-color);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* --- Hero/Header Section --- */
+.hero {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0 10%;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero-content .accent {
+    color: var(--accent-color);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    max-width: 700px;
+}
+
+/* --- Main Works Section --- */
+main {
+    padding: 80px 10%;
+    border-top: 1px solid var(--border-color);
+}
+
+main h2 {
+    font-size: 3rem;
+    margin-bottom: 50px;
+}
+
+.sub-h2 {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-left: 15px;
+    opacity: 0.7;
+}
+
+/* Grid Layout for Projects */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+}
+
+/* Individual Project Card Modern Design */
+.project {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden; /* Ensures image rounded corners work */
+    transition: 0.4s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.project:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1);
+}
+
+.project-image img {
+    width: 100%;
+    height: 300px; /* Fixed height for image area for consistency */
+    object-fit: cover; /* Crops image to fill area without distortion */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.project-details {
+    padding: 30px;
+    flex-grow: 1; /* Pushes content down if needed */
+}
+
+.project h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--heading-color);
+}
+
+.project p {
+    color: var(--text-color);
+    font-size: 1.05rem;
+}
+
+/* --- Footer Section --- */
+footer {
+    padding: 80px 10%;
+    background-color: #0b0e14;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+footer h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+footer p {
+    margin-bottom: 40px;
+    font-size: 1.2rem;
+}
+
+.contact-link {
+    display: block;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.contact-link:hover {
+    color: var(--heading-color);
+    letter-spacing: 1px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-content p { font-size: 1.1rem; }
+    nav { justify-content: center; }
+    .nav-link { margin: 0 15px; font-size: 1rem; }
+    main { padding: 50px 5%; }
+    .project-grid { grid-template-columns: 1fr; }
+    .project-image img { height: 200px; }
+    .contact-link { font-size: 1.2rem; }
 }
