@@ -229,3 +229,54 @@ footer p {
     .project-image img { height: 200px; }
     .contact-link { font-size: 1.2rem; }
 }
+/* --- Professional Project Button --- */
+.project-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.project-btn:hover {
+    background: var(--accent-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px rgba(88, 166, 255, 0.4);
+}
+
+/* --- Themed Back to Top Box --- */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    min-width: 60px;
+}
+
+#back-to-top .icon { font-size: 1.2rem; margin-bottom: 2px; }
+#back-to-top .text { font-size: 0.7rem; font-weight: bold; font-family: var(--font-heading); }
+
+#back-to-top:hover {
+    border-color: var(--accent-color);
+    color: var(--heading-color);
+    background: #1c2128; /* Slightly lighter than card-bg */
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
