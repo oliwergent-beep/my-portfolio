@@ -1,76 +1,88 @@
 // ==========================================
-// Part 1: Particle Network Animation
+// Part 1: Cyberpunk / Rave Wave Animation
 // ==========================================
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
+let width, height;
 
 function setCanvasSize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    width = canvas.width;
+    height = canvas.height;
 }
 setCanvasSize();
+window.addEventListener('resize', setCanvasSize);
 
-let particles = [];
-const PARTICLE_COUNT = 90;
-const CONNECTION_DISTANCE = 120;
-const PARTICLE_COLOR = 'rgba(88, 166, 255, 0.8)';
+// Track scroll and mouse for interactive distortion
+let scrollY = window.scrollY;
+let targetScrollY = window.scrollY;
+let mouseX = width / 2;
+let mouseY = height / 2;
+let targetMouseX = width / 2;
+let targetMouseY = height / 2;
 
-window.addEventListener('resize', () => { 
-    setCanvasSize(); 
+window.addEventListener('scroll', () => { targetScrollY = window.scrollY; });
+window.addEventListener('mousemove', (e) => {
+    targetMouseX = e.clientX;
+    targetMouseY = e.clientY;
 });
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 1 - 0.5;
-        this.speedY = Math.random() * 1 - 0.5;
-    }
-    update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-    }
-    draw() {
-        ctx.fillStyle = PARTICLE_COLOR;
+const lines = 45; // Density of the grid
+const pointsPerLine = 70; // Smoothness of the wave
+
+function animateWaves() {
+    // Smooth interpolation
+    scrollY += (targetScrollY - scrollY) * 0.1;
+    mouseX += (targetMouseX - mouseX) * 0.1;
+    mouseY += (targetMouseY - mouseY) * 0.1;
+    let time = performance.now() * 0.0001; // Tiny base drift so it feels alive
+
+    // Deep dark background with slight trail fade
+    ctx.fillStyle = 'rgba(5, 5, 8, 0.4)';
+    ctx.fillRect(0, 0, width, height);
+
+    const spacingY = height / lines;
+    const spacingX = width / pointsPerLine;
+
+    for (let i = 0; i < lines + 5; i++) {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
+        let yBase = i * spacingY - 50;
 
-for (let i = 0; i < PARTICLE_COUNT; i++) {
-    particles.push(new Particle());
-}
+        for (let j = 0; j <= pointsPerLine; j++) {
+            let x = j * spacingX;
 
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-        
-        for (let j = i; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+            // Math: Wave moves primarily when SCROLLING (scrollY * 0.004)
+            let wave1 = Math.sin((x * 0.003) + (scrollY * 0.004) + time + i * 0.1) * 35;
+            let wave2 = Math.cos((x * 0.005) - (scrollY * 0.002) - time * 0.5 + i * 0.05) * 20;
             
-            if (distance < CONNECTION_DISTANCE) {
-                ctx.beginPath();
-                ctx.strokeStyle = `rgba(88, 166, 255, ${1 - distance / CONNECTION_DISTANCE})`;
-                ctx.lineWidth = 0.5;
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.stroke();
+            // Interaction: Mouse warps and repels the grid
+            let dist = Math.hypot(x - mouseX, yBase - mouseY);
+            let mouseWarp = 0;
+            const influenceRadius = 300;
+            if (dist < influenceRadius) {
+                let normalized = dist / influenceRadius;
+                mouseWarp = Math.cos(normalized * Math.PI) * 50 * (1 - normalized);
+            }
+
+            let y = yBase + wave1 + wave2 - mouseWarp;
+
+            if (j === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
             }
         }
+
+        // Acid/Tech Color shift: sweeps between Cyan and Magenta based on scroll depth
+        let hue = 220 + Math.sin(scrollY * 0.001 + i * 0.05 + time) * 80;
+        ctx.strokeStyle = `hsla(${hue}, 100%, 55%, ${0.3 + (i/lines)*0.7})`;
+        ctx.lineWidth = 2;
+        ctx.stroke();
     }
-    requestAnimationFrame(animateParticles);
+    requestAnimationFrame(animateWaves);
 }
-animateParticles();
+animateWaves();
 
 // ==========================================
 // Part 2: Scroll Reveal Animations
@@ -80,7 +92,7 @@ function reveal() {
     for (let i = 0; i < reveals.length; i++) {
         const windowHeight = window.innerHeight;
         const elementTop = reveals[i].getBoundingClientRect().top;
-        const elementVisible = 100; // Shows when element is 100px from the bottom
+        const elementVisible = 100; 
 
         if (elementTop < windowHeight - elementVisible) {
             reveals[i].classList.add("active");
@@ -88,7 +100,7 @@ function reveal() {
     }
 }
 window.addEventListener("scroll", reveal);
-reveal(); // Trigger once on load
+reveal(); 
 
 // ==========================================
 // Part 3: ScrollSpy (Dynamic Nav Highlighting)
@@ -114,14 +126,11 @@ window.addEventListener("scroll", () => {
     });
 });
 
-// Smooth Scroll for Nav Links
 document.querySelectorAll('.nav-link').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
-        document.querySelector(targetId).scrollIntoView({ 
-            behavior: 'smooth' 
-        });
+        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
     });
 });
 
@@ -136,20 +145,16 @@ const closeBtn = document.querySelector('.close-btn');
 
 document.querySelectorAll('.project').forEach(project => {
     project.addEventListener('click', function(e) {
-        // Prevent modal from opening if the user clicks the Itch.io button directly
         if(e.target.classList.contains('project-btn')) return;
 
-        // Get content from the clicked card
         const imgSrc = this.querySelector('img').src;
         const title = this.querySelector('h3').innerText;
         const desc = this.querySelector('p').innerHTML;
 
-        // Put content into modal
         modalImg.src = imgSrc;
         modalTitle.innerText = title;
         modalDesc.innerHTML = desc;
 
-        // Show modal and stop background from scrolling
         modal.classList.add('active');
         document.body.style.overflow = 'hidden'; 
     });
@@ -157,17 +162,15 @@ document.querySelectorAll('.project').forEach(project => {
 
 function closeModal() {
     modal.classList.remove('active');
-    document.body.style.overflow = 'auto'; // Re-enable scrolling
+    document.body.style.overflow = 'auto'; 
 }
 
 closeBtn.addEventListener('click', closeModal);
 
-// Close if clicking outside the modal content (on the dark background)
 window.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
 });
 
-// Close on 'Escape' key press
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
 });
