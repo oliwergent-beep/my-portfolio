@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Oliwer Gent</title>
+    <title>Oliwer Gent — Creative Technology Portfolio</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -15,81 +15,162 @@
     <canvas id="particle-canvas"></canvas>
 
     <nav>
-        <a href="#home" class="nav-link active-link">Home</a>
-        <a href="#works" class="nav-link">Works</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <div class="nav-brand">OG // ENGINEERING &amp; DESIGN ARCHIVE</div>
+        <div class="nav-links">
+            <a href="#home" class="nav-link active-link">01. Profile</a>
+            <a href="#works" class="nav-link">02. Works</a>
+            <a href="#contact" class="nav-link">03. Contact</a>
+        </div>
     </nav>
 
     <header id="home" class="hero reveal">
         <div class="hero-content">
-            <h1>Digital Portfolio<br><span class="accent">Oliwer Gent</span></h1>
-            <p>Amateur designer and CreaTe student at the VU. <br>Aiming to create the most practical and user-friendly products.</p>
+            <div class="eyebrow">CREATIVE TECHNOLOGY // VU AMSTERDAM &amp; UTWENTE</div>
+            <h1>Oliwer Gent<br><span class="accent">Hardware &amp; Interactive Systems.</span></h1>
+            <p>Creative Technologist focused on bridging physical electronics with responsive digital software. Experienced in hardware prototyping, circuit soldering, microcontroller integration, and 3D environment design—building practical, user-centered products from initial schematic to finished enclosure.</p>
+            
+            <div class="skills-section">
+                <span class="skills-label">CORE COMPETENCIES //</span>
+                <div class="skills-bar">
+                    <span class="skill-pill">Hardware Prototyping &amp; PCB Soldering</span>
+                    <span class="skill-pill">Arduino &amp; C++ Embedded Systems</span>
+                    <span class="skill-pill">Java &amp; Processing Interactive Media</span>
+                    <span class="skill-pill">3D Modeling &amp; Rendering (Blender)</span>
+                    <span class="skill-pill">IoT Sensor Networks (LoRa)</span>
+                    <span class="skill-pill">Web Development (HTML / CSS / JS)</span>
+                </div>
+            </div>
         </div>
     </header>
 
     <main id="works">
-        <h2 class="reveal">Works <span class="sub-h2">// Selected projects since Aug 2025</span></h2>
+        <div class="section-header reveal">
+            <h2>Selected Works</h2>
+            <span class="sub-h2">TECHNICAL INDEX // 2025 — 2026</span>
+        </div>
         
         <div class="project-grid">
 
-            <article class="project reveal">
+            <!-- 01: Custom Mechanical Macropad (2 Photos Only) -->
+            <article class="project reveal" data-gallery="images/macropad-1.jpg|images/IMG_5525.jpg,images/macropad-2.png|images/image_4.png">
                 <div class="project-image">
-                    <img src="images/OGent ProfDev M4 Roadmap.png" alt="M4 Engineering Roadmap"> 
+                    <span class="project-index">01 // HARDWARE &amp; USB HID</span>
+                    <span class="gallery-badge">2 PHOTOS — CLICK TO VIEW BUILD</span>
+                    <img src="images/macropad-1.jpg" data-fallback="images/IMG_5525.jpg" alt="Custom Mechanical Macropad"> 
                 </div>
                 <div class="project-details">
-                    <h3>Smart Tech & Engineering Roadmap</h3>
-                    <p>Created for the M4 ProfDev challenge. This structural roadmap deconstructs the system architectures of the Philips Hue Bridge and Oura Ring, mapping real-world IoT requirements to a concrete academic trajectory targeting an Engineering Master's degree.</p>
+                    <h3>Custom Mechanical Macropad</h3>
+                    <p>Assembled and programmed a custom 3-key and clickable rotary knob mechanical macropad housed in a 4-screw layered acrylic enclosure. Hand-soldered the 7-pin rotary encoder joints on the PCB, installed hot-swappable mechanical switches, and configured the onboard memory to execute custom macOS quick keys and media controls.</p>
+                    <div class="project-tags">
+                        <span>PCB Soldering</span>
+                        <span>Rotary Encoder</span>
+                        <span>USB HID Programming</span>
+                        <span>Hardware Enclosure</span>
+                    </div>
                 </div>
             </article>
 
+            <!-- 02: Smart Tech & Engineering Roadmap -->
             <article class="project reveal">
                 <div class="project-image">
-                    <img src="images/creature-program.png" alt="Creature Program Interface"> 
+                    <span class="project-index">02 // SYSTEMS ARCHITECTURE</span>
+                    <img src="images/OGent ProfDev M4 Roadmap.png" data-fallback="images/OGent ProfDev M4 Roadmap.jpg" alt="M4 Engineering Roadmap"> 
                 </div>
                 <div class="project-details">
-                    <h3>Creature Program</h3>
-                    <p>Takes inspiration from Lilo and Stitch, using advanced Java methods and variables to bring animated creatures to life. Users interact by clicking a red ball, triggering dynamic passing animations and environmental effects like animated waves.</p>
+                    <h3>Smart Tech &amp; Engineering Roadmap</h3>
+                    <p>Developed for the Module 4 Professional Development challenge. This technical roadmap deconstructs the embedded hardware and cloud architectures of the Philips Hue Bridge and Oura Ring, mapping real-world IoT engineering requirements to a concrete academic trajectory toward an Engineering Master's degree.</p>
+                    <div class="project-tags">
+                        <span>Systems Analysis</span>
+                        <span>IoT Architecture</span>
+                        <span>Embedded Engineering</span>
+                    </div>
                 </div>
             </article>
 
+            <!-- 03: Memory Mirror -->
             <article class="project reveal">
                 <div class="project-image">
-                    <img src="images/A1_OliwerGent_render-1.png" alt="Blender Tatami Room Render"> 
-                </div>
-                <div class="project-details">
-                    <h3>3D Room Environment</h3>
-                    <p>Initial exploration into complex 3D modeling using Blender. Focused on precise composition and realistic textures to create a detailed Japanese-style interior, featuring custom modeled furniture and detailed 'tatami' floor mat textures.</p>
-                </div>
-            </article>
-
-            <article class="project reveal">
-                <div class="project-image">
-                    <img src="images/PPC final project.png" alt="Memory Mirror Interaction"> 
+                    <span class="project-index">03 // PHYSICAL COMPUTING</span>
+                    <img src="images/PPC final project.png" data-fallback="images/PPC final project.jpg" alt="Memory Mirror Interaction"> 
                 </div>
                 <div class="project-details">
                     <h3>Memory Mirror</h3>
-                    <p>Designed and built an interactive installation that manipulates live video feed via physical controls. Wired an Arduino circuit with potentiometers to dynamically change video pixelation and saturation in a custom Processing sketch, bridging physical user input with digital visualization.</p>
+                    <p>Designed and engineered an interactive physical computing installation that manipulates a live camera feed through tactile hardware controls. Wired an Arduino microcontroller circuit with analog potentiometers to control real-time video pixelation and color saturation inside a custom Processing sketch.</p>
+                    <div class="project-tags">
+                        <span>Arduino Uno</span>
+                        <span>Processing (Java)</span>
+                        <span>Analog Sensors</span>
+                        <span>Real-Time Video</span>
+                    </div>
                 </div>
             </article>
 
+            <!-- 04: Kallax Smart Bin -->
             <article class="project reveal">
                 <div class="project-image">
-                    <img src="images/A2 render.png" alt="Blender Tank Render"> 
+                    <span class="project-index">04 // IOT &amp; SMART SENSORS</span>
+                    <img src="images/Smart bin.jpeg" data-fallback="images/Smart bin.jpg" alt="Kallax Smart Waste Bin"> 
                 </div>
                 <div class="project-details">
-                    <h3>Interactive Tank Model</h3>
-                    <p>Modeled a stylized tank in Blender, heavily based on Leonardo Da Vinci's Wooden Tank concept from 1487, then engineered a playable web experience. Implemented controls allowing users to drive the 3D model within a browser environment, showcasing the integration of custom art assets with real-time web game engine logic.</p>
-                    <a href="https://oliwergent.itch.io/a2-oliwergent" target="_blank" class="project-btn">Play on Itch.io</a>
+                    <h3>Kallax Smart Bin</h3>
+                    <p>Built a smart waste management prototype integrating ultrasonic distance sensors and MQ135 air quality sensors with an Arduino microcontroller. Programmed the embedded system to monitor trash fill levels and detect unpleasant odors, transmitting live status packets over LoRa wireless radio to optimize collection routes.</p>
+                    <div class="project-tags">
+                        <span>LoRa Wireless</span>
+                        <span>Ultrasonic &amp; MQ135</span>
+                        <span>Embedded C++</span>
+                    </div>
                 </div>
             </article>
-            
+
+            <!-- 05: Interactive Tank Model -->
             <article class="project reveal">
                 <div class="project-image">
-                    <img src="images/Smart bin.jpeg" alt="Kallax Smart Waste Bin"> 
+                    <span class="project-index">05 // 3D ASSET &amp; WEB ENGINE</span>
+                    <img src="images/A2 render.png" data-fallback="images/A2 render.jpg" alt="Blender Tank Render"> 
                 </div>
                 <div class="project-details">
-                    <h3>Kallax Smart bin</h3>
-                    <p>Integrated ultrasonic and MQ135 air quality sensors with a microcontroller to revolutionize waste management. Programmed the system to analyze bin fill levels and detect pungent odors, transmitting real-time data via LoRa to optimize collection routes.</p>
+                    <h3>Interactive Da Vinci Tank</h3>
+                    <p>Modeled and textured a 3D wooden tank in Blender inspired by Leonardo da Vinci's 1487 armoured vehicle concept, then integrated the asset into a playable browser experience. Engineered interactive driving controls and camera logic to demonstrate a complete 3D asset-to-game-engine workflow.</p>
+                    <div class="project-tags">
+                        <span>Blender 3D</span>
+                        <span>UV Texturing</span>
+                        <span>Unity / WebGL</span>
+                    </div>
+                    <a href="https://oliwergent.itch.io/a2-oliwergent" target="_blank" class="project-btn">Launch Interactive Build ↗</a>
+                </div>
+            </article>
+
+            <!-- 06: 3D Room Environment -->
+            <article class="project reveal">
+                <div class="project-image">
+                    <span class="project-index">06 // 3D ARCHITECTURAL RENDER</span>
+                    <img src="images/A1_OliwerGent_render-1.png" data-fallback="images/A1_OliwerGent_render-1.jpg" alt="Blender Tatami Room Render"> 
+                </div>
+                <div class="project-details">
+                    <h3>3D Tatami Room Environment</h3>
+                    <p>Architectural 3D modeling and rendering study created in Blender. Focused on structural proportions, natural lighting, and custom surface shaders to build a traditional Japanese interior featuring shoji sliding screens and detailed tatami floor mat textures.</p>
+                    <div class="project-tags">
+                        <span>Blender</span>
+                        <span>Architectural Modeling</span>
+                        <span>Lighting &amp; Shaders</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 07: Creature Program -->
+            <article class="project reveal">
+                <div class="project-image">
+                    <span class="project-index">07 // INTERACTIVE SOFTWARE</span>
+                    <img src="images/creature-program.png" data-fallback="images/creature-program.jpg" alt="Creature Program Interface"> 
+                </div>
+                <div class="project-details">
+                    <h3>Creature Program</h3>
+                    <p>Interactive object-oriented animation built in Java and Processing, inspired by Lilo &amp; Stitch. Structured custom classes, methods, and state variables so multiple animated characters respond dynamically when users click and pass a red beach ball across a moving ocean scene.</p>
+                    <div class="project-tags">
+                        <span>Java</span>
+                        <span>Processing</span>
+                        <span>Object-Oriented Code</span>
+                    </div>
                 </div>
             </article>
 
@@ -97,10 +178,51 @@
     </main>
 
     <footer id="contact" class="reveal">
-        <h2>Get in touch</h2>
-        <p>Feel free to reach out via email or phone.</p>
-        <a href="mailto:oliwer.gent@gmail.com" class="contact-link">oliwer.gent@gmail.com</a>
-        <a href="tel:+31618336772" class="contact-link">+31 6 18336772</a>
+        <div class="footer-grid">
+            <div class="footer-info">
+                <div class="eyebrow">03 // DIRECT COMMUNICATION</div>
+                <h2>Get in touch</h2>
+                <p>Have a question about one of my hardware builds, academic projects, or collaborations? Send a message through the form or reach out directly via email or phone.</p>
+                
+                <div class="contact-links">
+                    <div class="contact-item">
+                        <span class="contact-label">EMAIL //</span>
+                        <a href="mailto:oliwer.gent@gmail.com" class="contact-link">oliwer.gent@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">PHONE //</span>
+                        <a href="tel:+31618336772" class="contact-link">+31 6 18336772</a>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">LOCATION //</span>
+                        <span class="contact-static">Amsterdam, Netherlands</span>
+                    </div>
+                </div>
+            </div>
+
+            <form id="contact-form" class="contact-form" action="https://formsubmit.co/ajax/oliwer.gent@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Portfolio Message — Oliwer Gent">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <div class="form-group">
+                    <label for="name">NAME //</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">EMAIL //</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">MESSAGE //</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="Write your message here..."></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="submit-btn">SEND MESSAGE ↗</button>
+                <p id="form-status" class="form-status"></p>
+            </form>
+        </div>
     </footer>
 
     <a href="#home" id="back-to-top" class="top-btn">
@@ -111,7 +233,10 @@
     <div id="project-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <img id="modal-img" src="" alt="Project Image">
+            <div class="modal-media">
+                <img id="modal-img" src="" alt="Project Image">
+                <div id="modal-thumbnails" class="modal-thumbnails"></div>
+            </div>
             <div class="modal-text">
                 <h3 id="modal-title">Title</h3>
                 <p id="modal-desc">Description</p>

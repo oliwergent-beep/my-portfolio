@@ -1,6 +1,6 @@
-// ==========================================
-// Part 1: Cyberpunk / Rave Wave Animation
-// ==========================================
+// =========================================================
+// Part 1: Architectural Topological & Vector Crosshair Field
+// =========================================================
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 let width, height;
@@ -14,13 +14,12 @@ function setCanvasSize() {
 setCanvasSize();
 window.addEventListener('resize', setCanvasSize);
 
-// Track scroll and mouse for interactive distortion
 let scrollY = window.scrollY;
 let targetScrollY = window.scrollY;
-let mouseX = width / 2;
-let mouseY = height / 2;
-let targetMouseX = width / 2;
-let targetMouseY = height / 2;
+let mouseX = width * 0.65;
+let mouseY = height * 0.4;
+let targetMouseX = mouseX;
+let targetMouseY = mouseY;
 
 window.addEventListener('scroll', () => { targetScrollY = window.scrollY; });
 window.addEventListener('mousemove', (e) => {
@@ -28,44 +27,42 @@ window.addEventListener('mousemove', (e) => {
     targetMouseY = e.clientY;
 });
 
-const lines = 45; // Density of the grid
-const pointsPerLine = 70; // Smoothness of the wave
+function animateField() {
+    scrollY += (targetScrollY - scrollY) * 0.08;
+    mouseX += (targetMouseX - mouseX) * 0.08;
+    mouseY += (targetMouseY - mouseY) * 0.08;
+    const time = performance.now() * 0.00025;
 
-function animateWaves() {
-    // Smooth interpolation
-    scrollY += (targetScrollY - scrollY) * 0.1;
-    mouseX += (targetMouseX - mouseX) * 0.1;
-    mouseY += (targetMouseY - mouseY) * 0.1;
-    let time = performance.now() * 0.0001; // Tiny base drift so it feels alive
-
-    // Deep dark background with slight trail fade
-    ctx.fillStyle = 'rgba(5, 5, 8, 0.4)';
+    ctx.fillStyle = '#0a0b0d';
     ctx.fillRect(0, 0, width, height);
 
-    const spacingY = height / lines;
-    const spacingX = width / pointsPerLine;
+    // 1. Monochrome Blueprint Isolines
+    const numLines = 26;
+    const segments = 60;
+    const spacingY = (height + 120) / numLines;
+    const spacingX = width / segments;
 
-    for (let i = 0; i < lines + 5; i++) {
+    for (let i = 0; i < numLines; i++) {
         ctx.beginPath();
-        let yBase = i * spacingY - 50;
+        const baseY = i * spacingY - 60;
 
-        for (let j = 0; j <= pointsPerLine; j++) {
-            let x = j * spacingX;
+        for (let j = 0; j <= segments; j++) {
+            const x = j * spacingX;
 
-            // Math: Wave moves primarily when SCROLLING (scrollY * 0.004)
-            let wave1 = Math.sin((x * 0.003) + (scrollY * 0.004) + time + i * 0.1) * 35;
-            let wave2 = Math.cos((x * 0.005) - (scrollY * 0.002) - time * 0.5 + i * 0.05) * 20;
-            
-            // Interaction: Mouse warps and repels the grid
-            let dist = Math.hypot(x - mouseX, yBase - mouseY);
-            let mouseWarp = 0;
-            const influenceRadius = 300;
-            if (dist < influenceRadius) {
-                let normalized = dist / influenceRadius;
-                mouseWarp = Math.cos(normalized * Math.PI) * 50 * (1 - normalized);
+            const n1 = Math.sin(x * 0.0022 + time + i * 0.18 + scrollY * 0.0015) * 26;
+            const n2 = Math.cos(x * 0.0045 - time * 0.7 + i * 0.09 - scrollY * 0.0008) * 12;
+
+            const dx = x - mouseX;
+            const dy = baseY - mouseY;
+            const dist = Math.hypot(dx, dy);
+            const radius = 300;
+            let pull = 0;
+            if (dist < radius) {
+                const factor = 1 - dist / radius;
+                pull = Math.sin(factor * Math.PI) * 32;
             }
 
-            let y = yBase + wave1 + wave2 - mouseWarp;
+            const y = baseY + n1 + n2 - pull;
 
             if (j === 0) {
                 ctx.moveTo(x, y);
@@ -74,37 +71,85 @@ function animateWaves() {
             }
         }
 
-        // Acid/Tech Color shift: sweeps between Cyan and Magenta based on scroll depth
-        let hue = 220 + Math.sin(scrollY * 0.001 + i * 0.05 + time) * 80;
-        ctx.strokeStyle = `hsla(${hue}, 100%, 55%, ${0.3 + (i/lines)*0.7})`;
-        ctx.lineWidth = 2;
+        const isIndexContour = i % 5 === 0;
+        ctx.strokeStyle = isIndexContour
+            ? 'rgba(236, 234, 228, 0.11)'
+            : 'rgba(236, 234, 228, 0.038)';
+        ctx.lineWidth = isIndexContour ? 1.1 : 0.7;
         ctx.stroke();
     }
-    requestAnimationFrame(animateWaves);
-}
-animateWaves();
 
-// ==========================================
-// Part 2: Scroll Reveal Animations
-// ==========================================
+    // 2. Precision Vector Grid Crosshairs
+    const gridStep = 95;
+    for (let gx = gridStep / 2; gx < width; gx += gridStep) {
+        for (let gy = gridStep / 2; gy < height; gy += gridStep) {
+            const dx = mouseX - gx;
+            const dy = mouseY - gy;
+            const dist = Math.hypot(dx, dy);
+            const angle = Math.atan2(dy, dx) + scrollY * 0.001;
+
+            const isNear = dist < 230;
+            const len = isNear ? 5.5 : 3;
+
+            ctx.save();
+            ctx.translate(gx, gy);
+            ctx.rotate(isNear ? angle : 0);
+
+            ctx.beginPath();
+            ctx.moveTo(-len, 0);
+            ctx.lineTo(len, 0);
+            ctx.moveTo(0, -len);
+            ctx.lineTo(0, len);
+
+            ctx.strokeStyle = isNear
+                ? 'rgba(255, 79, 31, 0.42)'
+                : 'rgba(236, 234, 228, 0.065)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            ctx.restore();
+        }
+    }
+
+    requestAnimationFrame(animateField);
+}
+animateField();
+
+// =========================================================
+// Part 2: Automatic Image Extension & Filename Fallback
+// =========================================================
+function attachFallback(imgElement, fallbackPath) {
+    if (!fallbackPath) return;
+    imgElement.addEventListener('error', function handleErr() {
+        if (this.src.indexOf(fallbackPath) === -1) {
+            this.src = fallbackPath;
+        }
+        this.removeEventListener('error', handleErr);
+    });
+}
+
+document.querySelectorAll('img[data-fallback]').forEach(img => {
+    attachFallback(img, img.getAttribute('data-fallback'));
+});
+
+// =========================================================
+// Part 3: Scroll Reveal Animations
+// =========================================================
 function reveal() {
     const reveals = document.querySelectorAll(".reveal");
+    const windowHeight = window.innerHeight;
     for (let i = 0; i < reveals.length; i++) {
-        const windowHeight = window.innerHeight;
         const elementTop = reveals[i].getBoundingClientRect().top;
-        const elementVisible = 100; 
-
-        if (elementTop < windowHeight - elementVisible) {
+        if (elementTop < windowHeight - 80) {
             reveals[i].classList.add("active");
         }
     }
 }
 window.addEventListener("scroll", reveal);
-reveal(); 
+reveal();
 
-// ==========================================
-// Part 3: ScrollSpy (Dynamic Nav Highlighting)
-// ==========================================
+// =========================================================
+// Part 4: ScrollSpy Navigation
+// =========================================================
 const sections = document.querySelectorAll("header, main, footer");
 const navLinks = document.querySelectorAll(".nav-link");
 
@@ -112,15 +157,14 @@ window.addEventListener("scroll", () => {
     let current = "";
     sections.forEach((section) => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - 150) {
+        if (window.pageYOffset >= sectionTop - 200) {
             current = section.getAttribute("id");
         }
     });
 
     navLinks.forEach((link) => {
         link.classList.remove("active-link");
-        if (link.getAttribute("href").includes(current)) {
+        if (current && link.getAttribute("href").includes(current)) {
             link.classList.add("active-link");
         }
     });
@@ -134,43 +178,111 @@ document.querySelectorAll('.nav-link').forEach(anchor => {
     });
 });
 
-// ==========================================
-// Part 4: Project Modal Interaction
-// ==========================================
+// =========================================================
+// Part 5: Project Modal with 2-Photo Gallery Support
+// =========================================================
 const modal = document.getElementById('project-modal');
 const modalImg = document.getElementById('modal-img');
+const modalThumbnails = document.getElementById('modal-thumbnails');
 const modalTitle = document.getElementById('modal-title');
 const modalDesc = document.getElementById('modal-desc');
 const closeBtn = document.querySelector('.close-btn');
 
 document.querySelectorAll('.project').forEach(project => {
     project.addEventListener('click', function(e) {
-        if(e.target.classList.contains('project-btn')) return;
+        if (e.target.classList.contains('project-btn')) return;
 
-        const imgSrc = this.querySelector('img').src;
+        const mainImg = this.querySelector('img').src;
         const title = this.querySelector('h3').innerText;
         const desc = this.querySelector('p').innerHTML;
+        const galleryAttr = this.getAttribute('data-gallery');
 
-        modalImg.src = imgSrc;
+        modalImg.src = mainImg;
         modalTitle.innerText = title;
         modalDesc.innerHTML = desc;
+        modalThumbnails.innerHTML = '';
+
+        if (galleryAttr) {
+            const items = galleryAttr.split(',').map(s => s.trim());
+            items.forEach((itemStr, idx) => {
+                const [primaryPath, fallbackPath] = itemStr.split('|');
+                const thumb = document.createElement('img');
+                thumb.src = primaryPath;
+                attachFallback(thumb, fallbackPath);
+                thumb.className = 'modal-thumb' + (idx === 0 ? ' active-thumb' : '');
+                thumb.addEventListener('click', (ev) => {
+                    ev.stopPropagation();
+                    modalImg.src = thumb.src;
+                    document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active-thumb'));
+                    thumb.classList.add('active-thumb');
+                });
+                modalThumbnails.appendChild(thumb);
+            });
+        }
 
         modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; 
+        document.body.style.overflow = 'hidden';
     });
 });
 
 function closeModal() {
     modal.classList.remove('active');
-    document.body.style.overflow = 'auto'; 
+    document.body.style.overflow = 'auto';
 }
 
 closeBtn.addEventListener('click', closeModal);
-
 window.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
 });
-
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
 });
+
+// =========================================================
+// Part 6: Working Contact Form Handler (FormSubmit + Fallback)
+// =========================================================
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+const submitBtn = document.getElementById('submit-btn');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'SENDING...';
+        formStatus.style.color = '#9da3ae';
+        formStatus.innerText = 'Transmitting message...';
+
+        const formData = new FormData(contactForm);
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                formStatus.style.color = '#eceae4';
+                formStatus.innerText = '✓ Message sent successfully. Thank you for reaching out!';
+                contactForm.reset();
+            } else {
+                throw new Error('Form service requires activation or mailto fallback.');
+            }
+        } catch (err) {
+            // Instant mailto fallback so the message never fails during a live demo
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            window.location.href = `mailto:oliwer.gent@gmail.com?subject=${subject}&body=${body}`;
+
+            formStatus.style.color = '#eceae4';
+            formStatus.innerText = '✓ Opening your email client to send directly.';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'SEND MESSAGE ↗';
+        }
+    });
+}
