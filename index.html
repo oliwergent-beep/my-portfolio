@@ -1,163 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oliwer Gent | Creative Technologist</title>
-    <meta name="description" content="Portfolio of Oliwer Gent, Creative Technology student at VU Amsterdam. Electronics, interactive installations, 3D design and web projects.">
-    <meta property="og:title" content="Oliwer Gent | Creative Technology Portfolio">
-    <meta property="og:description" content="Electronics, interactive installations, 3D design and web projects by Oliwer Gent.">
-    <meta property="og:image" content="https://oliwergent-beep.github.io/my-portfolio/images/macropad-1.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%232f4bff%22/><text x=%2250%22 y=%2268%22 font-size=%2254%22 font-family=%22sans-serif%22 font-weight=%22700%22 fill=%22white%22 text-anchor=%22middle%22>OG</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oliwer Gent, creative technologist</title>
+  <meta name="description" content="Oliwer Gent is a Creative Technology student at VU Amsterdam who builds electronics, interactive installations, 3D worlds and code.">
+  <meta name="theme-color" content="#05070d">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Oliwer Gent, creative technologist">
+  <meta property="og:description" content="Electronics, interactive installations, 3D worlds and code. A portfolio built from thousands of live particles.">
+  <meta property="og:image" content="https://oliwergent-beep.github.io/my-portfolio/assets/img/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 fill=%22%2305070d%22/><g fill=%22%23ffb23e%22><circle cx=%2210%22 cy=%2210%22 r=%222.4%22/><circle cx=%2216%22 cy=%2210%22 r=%222.4%22/><circle cx=%2222%22 cy=%2210%22 r=%222.4%22/><circle cx=%2210%22 cy=%2216%22 r=%222.4%22/><circle cx=%2210%22 cy=%2222%22 r=%222.4%22/><circle cx=%2216%22 cy=%2222%22 r=%222.4%22/><circle cx=%2222%22 cy=%2222%22 r=%222.4%22/><circle cx=%2222%22 cy=%2216%22 r=%222.4%22/></g></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Doto:ROND,wght@0..100,100..900&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=10">
+  <script>document.documentElement.classList.add('is-loading');</script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Oliwer Gent","jobTitle":"Creative Technology student","affiliation":{"@type":"CollegeOrUniversity","name":"Vrije Universiteit Amsterdam"},"email":"mailto:oliwer.gent@gmail.com","url":"https://oliwergent-beep.github.io/my-portfolio/","sameAs":["https://github.com/oliwergent-beep","https://oliwergent.itch.io"]}
+  </script>
 </head>
 <body>
-    <a href="#works" class="skip-link">Skip to projects</a>
+  <a href="#work" class="skip">Skip to the projects</a>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
 
-    <nav>
-        <div class="wrap nav-inner">
-            <a href="#home" class="brand">Oliwer Gent</a>
-            <div class="nav-links">
-                <a href="#works" class="nav-link">Work</a>
-                <a href="#path" class="nav-link">Journey</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-        </div>
+  <header class="topbar">
+    <a href="#top" class="mark" aria-label="Oliwer Gent, back to the top">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><g fill="currentColor"><circle cx="4" cy="4" r="1.6"/><circle cx="10" cy="4" r="1.6"/><circle cx="16" cy="4" r="1.6"/><circle cx="4" cy="10" r="1.6"/><circle cx="4" cy="16" r="1.6"/><circle cx="10" cy="16" r="1.6"/><circle cx="16" cy="16" r="1.6"/><circle cx="16" cy="10" r="1.6"/></g></svg>
+      <span>Oliwer Gent</span>
+    </a>
+    <nav class="menu" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#journey">Journey</a>
+      <a href="#contact">Contact</a>
     </nav>
+  </header>
 
-    <header id="home" class="hero">
-        <canvas id="hero-canvas" aria-hidden="true"></canvas>
-        <div class="wrap hero-grid">
-            <div class="hero-text">
-            <p class="kicker">Creative Technology student at VU Amsterdam</p>
-            <h1>Hi, I'm Oliwer. I design and build interactive technology.</h1>
-            <p class="lead">I turn ideas into working things: small electronics, interactive installations, 3D worlds and websites. This is a collection of what I have built so far.</p>
-            <div class="hero-cta">
-                <a href="#works" class="btn btn-primary">See my work</a>
-                <a href="#contact" class="btn">Say hello</a>
-            </div>
-            </div>
-            <a href="#works" class="hero-stack" aria-label="See my work">
-                <img class="stack-1" src="images/A2 render.png" alt="Da Vinci tank render">
-                <img class="stack-2" src="images/macropad-1.png" alt="Custom macropad">
-                <img class="stack-3" src="images/creature-program.png" alt="Creature program">
-            </a>
+  <nav class="rail" aria-label="Sections"></nav>
+
+  <main>
+    <!-- Intro -->
+    <section id="top" class="hero" data-shape="galaxy" data-label="Intro">
+      <div class="wrap hero-inner">
+        <p class="hero-role">Creative Technology student at VU Amsterdam</p>
+        <h1 class="hero-name dots"><span>Oliwer</span> <span>Gent</span></h1>
+        <p class="hero-lede">I design and build things you can touch, click and play with: small electronics, interactive installations, 3D worlds and the code that ties them together.</p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-solid">See the work</a>
+          <a href="#contact" class="btn">Get in touch</a>
         </div>
-    </header>
-
-    <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>Electronics</span><span>Arduino</span><span>Soldering</span><span>Interactive installations</span><span>3D modelling</span><span>Blender</span><span>Processing</span><span>Web design</span><span>Wireless sensors</span><span>Electronics</span><span>Arduino</span><span>Soldering</span><span>Interactive installations</span><span>3D modelling</span><span>Blender</span><span>Processing</span><span>Web design</span><span>Wireless sensors</span></div></div>
-
-    <main id="works" class="section">
-        <div class="wrap">
-            <div class="section-head">
-                <h2>Selected work</h2>
-                <div class="filters" role="toolbar" aria-label="Filter projects">
-                    <button class="filter active" data-filter="all">All</button>
-                    <button class="filter" data-filter="electronics">Electronics</button>
-                    <button class="filter" data-filter="3d">3D</button>
-                    <button class="filter" data-filter="code">Code &amp; design</button>
-                </div>
-            </div>
-
-            <div class="project-grid">
-
-                <article class="project" data-cat="electronics" data-gallery="images/macropad-1.png,images/macropad-2.png">
-                    <div class="project-image"><img loading="lazy" src="images/macropad-1.png" alt="Custom mechanical macropad" class="crop-wide"></div>
-                    <h3>Custom Macropad</h3>
-                    <p>A small keyboard of my own: three keys and a knob that trigger shortcuts and control volume on my Mac. I soldered the parts, built the acrylic case and programmed what each key does.</p>
-                    <div class="project-tags"><span>Soldering</span><span>Programming</span><span>Product building</span></div>
-                </article>
-
-                <article class="project" data-cat="electronics">
-                    <div class="project-image"><img loading="lazy" src="images/OGent ProfDev M4 Roadmap.png" alt="My learning roadmap" class="fit-contain"></div>
-                    <h3>My Learning Roadmap</h3>
-                    <p>A one-page map of the skills I have, the ones I want next, and how they lead to a Master's degree. I made it after studying how products like the Philips Hue Bridge and the Oura Ring are built.</p>
-                    <div class="project-tags"><span>Research</span><span>Planning</span></div>
-                </article>
-
-                <article class="project" data-cat="electronics code">
-                    <div class="project-image"><img loading="lazy" src="images/PPC final project.png" alt="Memory Mirror" class="pos-mid"></div>
-                    <h3>Memory Mirror</h3>
-                    <p>An installation that plays with a live camera image. Turning the knobs makes the picture more blocky or more colourful, like a memory fading in and out.</p>
-                    <div class="project-tags"><span>Arduino</span><span>Processing</span><span>Live video</span></div>
-                </article>
-
-                <article class="project" data-cat="electronics">
-                    <div class="project-image"><img loading="lazy" src="images/Smart bin.jpeg" alt="Kallax Smart Bin" class="crop-sq"></div>
-                    <h3>Kallax Smart Bin</h3>
-                    <p>A bin that knows when it is full and when it starts to smell. Sensors check how full it is and how fresh the air is, then send a wireless message so it only gets emptied when needed.</p>
-                    <div class="project-tags"><span>Sensors</span><span>Wireless</span><span>Arduino</span></div>
-                </article>
-
-                <article class="project" data-cat="3d code">
-                    <div class="project-image"><img loading="lazy" src="images/A2 render.png" alt="Da Vinci tank render"></div>
-                    <h3>Da Vinci Tank</h3>
-                    <p>A wooden armoured vehicle based on Leonardo da Vinci's 1487 sketch. I modelled and textured it in Blender, then made it drivable in the browser.</p>
-                    <div class="project-tags"><span>Blender</span><span>Texturing</span><span>Playable demo</span></div>
-                    <a href="https://oliwergent.itch.io/a2-oliwergent" target="_blank" rel="noopener" class="project-btn">Play it in your browser ↗</a>
-                </article>
-
-                <article class="project" data-cat="3d">
-                    <div class="project-image"><img loading="lazy" src="images/A1_OliwerGent_render-1.png" alt="Tatami room render"></div>
-                    <h3>Tatami Room</h3>
-                    <p>A traditional Japanese room built in 3D, with sliding paper screens and woven floor mats. I focused on proportions, natural light and believable materials.</p>
-                    <div class="project-tags"><span>Blender</span><span>Lighting</span><span>Materials</span></div>
-                </article>
-
-                <article class="project" data-cat="code">
-                    <div class="project-image"><img loading="lazy" src="images/creature-program.png" alt="Creature program"></div>
-                    <h3>Creature Program</h3>
-                    <p>An animated beach scene inspired by Lilo &amp; Stitch. Click the characters and they react, and you can pass a red ball between them across a moving ocean.</p>
-                    <div class="project-tags"><span>Java</span><span>Processing</span><span>Animation</span></div>
-                </article>
-
-            </div>
-        </div>
-    </main>
-
-    <section id="path" class="section alt">
-        <div class="wrap">
-            <div class="section-head"><h2>My journey so far</h2></div>
-            <ol class="timeline">
-                <li><span class="t-tag">Year 1</span><h3>LED Cube</h3><p>Soldered a 3D cube of lights and made it glow with code.</p></li>
-                <li><span class="t-tag">Year 1</span><h3>This website</h3><p>Built from scratch with plain HTML, CSS and JavaScript.</p></li>
-                <li><span class="t-tag">Year 1</span><h3>Learning roadmap</h3><p>Researched how Philips Hue and Oura make their products, and planned my next skills.</p></li>
-                <li><span class="t-tag">Year 2</span><h3>Macropad</h3><p>Learned to solder small circuit boards and built my own keyboard.</p></li>
-                <li class="now"><span class="t-tag">Next</span><h3>How networks work</h3><p>Exploring how devices find each other and send messages. Notes coming soon.</p></li>
-            </ol>
-        </div>
+      </div>
+      <p class="hero-note"><span class="js-count">18,000</span> particles, simulated live. Move through them and click to send a ripple<span class="kbd-hint">, or use <kbd>↑</kbd> <kbd>↓</kbd> to travel</span>.</p>
     </section>
 
-    <footer id="contact" class="section">
-        <div class="wrap footer-grid">
-            <div>
-                <h2>Let's talk</h2>
-                <p>Questions about a project, or an idea to build together? Send me a message or find me online.</p>
-                <ul class="contact-links">
-                    <li><span>Email</span><a href="mailto:oliwer.gent@gmail.com">oliwer.gent@gmail.com</a></li>
-                    <li><span>GitHub</span><a href="https://github.com/oliwergent-beep" target="_blank" rel="noopener">oliwergent-beep</a></li>
-                    <li><span>itch.io</span><a href="https://oliwergent.itch.io" target="_blank" rel="noopener">oliwergent.itch.io</a></li>
-                </ul>
-            </div>
+    <!-- Work index -->
+    <section id="work" class="index" data-shape="constellation" data-label="Work">
+      <div class="wrap">
+        <h2 class="section-title dots">Selected work</h2>
+        <p class="section-intro">Six projects from my first two years: hardware I soldered, installations I wired up, and worlds I modelled and coded.</p>
+        <ol class="index-list">
+          <li><a href="#macropad" data-i="0"><span class="ix-title dots">Custom Macropad</span><span class="ix-meta">Electronics</span><span class="ix-year">Year 2</span></a></li>
+          <li><a href="#mirror" data-i="1"><span class="ix-title dots">Memory Mirror</span><span class="ix-meta">Installation</span><span class="ix-year">Year 1</span></a></li>
+          <li><a href="#smartbin" data-i="2"><span class="ix-title dots">Kallax Smart Bin</span><span class="ix-meta">Sensors and IoT</span><span class="ix-year">Year 1</span></a></li>
+          <li><a href="#tank" data-i="3"><span class="ix-title dots">Da Vinci Tank</span><span class="ix-meta">3D and game</span><span class="ix-year">Year 1</span></a></li>
+          <li><a href="#tatami" data-i="4"><span class="ix-title dots">Tatami Room</span><span class="ix-meta">3D</span><span class="ix-year">Year 1</span></a></li>
+          <li><a href="#creature" data-i="5"><span class="ix-title dots">Creature Program</span><span class="ix-meta">Creative coding</span><span class="ix-year">Year 1</span></a></li>
+        </ol>
+      </div>
+    </section>
 
-            <form id="contact-form" class="contact-form" action="https://formsubmit.co/ajax/oliwer.gent@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New Portfolio Message from Oliwer Gent's site">
-                <input type="hidden" name="_captcha" value="false">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required placeholder="Your name">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="you@example.com">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="4" required placeholder="What's on your mind?"></textarea>
-                <button type="submit" id="submit-btn" class="btn btn-primary">Send message</button>
-                <p id="form-status" class="form-status" role="status"></p>
-            </form>
+    <!-- 1 -->
+    <article id="macropad" class="chapter" data-shape="macropad" data-label="Custom Macropad">
+      <div class="wrap chapter-grid">
+        <div class="chapter-text">
+          <p class="chapter-kicker"><span class="chapter-n">1/6</span> Electronics, year 2</p>
+          <h2 class="chapter-title dots">Custom Macropad</h2>
+          <p class="chapter-summary">My own small keyboard: three keys and a knob that run shortcuts and control the volume on my Mac.</p>
+          <p>I started from loose parts: a circuit board, switches, an acrylic case, screws and a spool of solder. I soldered the board and switches myself, stacked the layered acrylic case around it, and programmed what each key and the knob does.</p>
+          <dl class="facts">
+            <div><dt>What I did</dt><dd>Soldering, assembly, key programming</dd></div>
+            <div><dt>Made with</dt><dd>Soldering iron, mechanical switches, acrylic</dd></div>
+          </dl>
+          <button class="btn js-open" data-project="macropad">View 2 photos</button>
         </div>
-    </footer>
+        <figure class="chapter-photo">
+          <button class="photo-btn js-open" data-project="macropad" aria-label="Open photos of the Custom Macropad">
+            <img src="assets/img/macropad.webp" alt="The finished macropad: three black keys and a silver knob on a clear acrylic case" width="1200" height="1600" loading="lazy">
+          </button>
+          <figcaption>The finished pad, on its layered acrylic case.</figcaption>
+        </figure>
+      </div>
+    </article>
 
-    <script src="js/script.js?v=8"></script>
+    <!-- 2 -->
+    <article id="mirror" class="chapter" data-shape="mirror" data-label="Memory Mirror">
+      <div class="wrap chapter-grid">
+        <div class="chapter-text">
+          <p class="chapter-kicker"><span class="chapter-n">2/6</span> Interactive installation, year 1</p>
+          <h2 class="chapter-title dots">Memory Mirror</h2>
+          <p class="chapter-summary">A live camera image that you can fade into a memory by turning knobs.</p>
+          <p>Knobs wired to an Arduino control a Processing sketch that runs on the live webcam feed. Turn one way and the picture breaks into bigger and bigger blocks; turn another and the colours drain or flare, like a memory fading in and out. The particles here do the same thing.</p>
+          <dl class="facts">
+            <div><dt>What I did</dt><dd>Circuit, Arduino code, Processing sketch</dd></div>
+            <div><dt>Made with</dt><dd>Arduino, potentiometers, Processing, webcam</dd></div>
+          </dl>
+          <button class="btn js-open" data-project="mirror">View photo</button>
+        </div>
+        <figure class="chapter-photo">
+          <button class="photo-btn js-open" data-project="mirror" aria-label="Open the photo of the Memory Mirror">
+            <img src="assets/img/mirror.webp" alt="A hand turning a knob on a breadboard while a laptop shows the pixelated camera image" width="900" height="1600" loading="lazy">
+          </button>
+          <figcaption>Testing the knobs against the live sketch.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article id="smartbin" class="chapter" data-shape="smartbin" data-label="Kallax Smart Bin">
+      <div class="wrap chapter-grid">
+        <div class="chapter-text">
+          <p class="chapter-kicker"><span class="chapter-n">3/6</span> Sensors and IoT, year 1</p>
+          <h2 class="chapter-title dots">Kallax Smart Bin</h2>
+          <p class="chapter-summary">A bin that knows when it is full and when it starts to smell.</p>
+          <p>Sensors under the wooden lid measure how full the bin is and how fresh the air inside is. When either one crosses a limit, the bin sends a wireless message, so it gets emptied when it needs to be instead of on a fixed schedule.</p>
+          <dl class="facts">
+            <div><dt>What I did</dt><dd>Sensor wiring, thresholds, wireless messages</dd></div>
+            <div><dt>Made with</dt><dd>Arduino, fill and air sensors, wireless module</dd></div>
+          </dl>
+          <button class="btn js-open" data-project="smartbin">View photo</button>
+        </div>
+        <figure class="chapter-photo">
+          <button class="photo-btn js-open" data-project="smartbin" aria-label="Open the photo of the Kallax Smart Bin">
+            <img src="assets/img/smartbin.webp" alt="A white bin with a round walnut lid and a blue USB cable on a studio table" width="1200" height="1600" loading="lazy">
+          </button>
+          <figcaption>The working prototype in the studio.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article id="tank" class="chapter" data-shape="tank" data-label="Da Vinci Tank">
+      <div class="wrap chapter-grid">
+        <div class="chapter-text">
+          <p class="chapter-kicker"><span class="chapter-n">4/6</span> 3D and game, year 1</p>
+          <h2 class="chapter-title dots">Da Vinci Tank</h2>
+          <p class="chapter-summary">Leonardo da Vinci's armoured vehicle from around 1487, modelled in Blender and drivable in your browser.</p>
+          <p>I rebuilt the sketch as a 3D model: a ribbed wooden shell with cannons on every side, riding on a wheeled frame. I textured it with wood materials, then turned it into a small playable demo you can drive around.</p>
+          <dl class="facts">
+            <div><dt>What I did</dt><dd>Modelling, texturing, playable build</dd></div>
+            <div><dt>Made with</dt><dd>Blender, browser game export</dd></div>
+          </dl>
+          <div class="chapter-actions">
+            <a class="btn btn-solid" href="https://oliwergent.itch.io/a2-oliwergent" target="_blank" rel="noopener">Play it on itch.io</a>
+            <button class="btn js-open" data-project="tank">View render</button>
+          </div>
+        </div>
+        <figure class="chapter-photo wide">
+          <button class="photo-btn js-open" data-project="tank" aria-label="Open the render of the Da Vinci Tank">
+            <img src="assets/img/tank.webp" alt="Render of a cone-shaped wooden tank with cannons around its edge and wheels underneath" width="1600" height="900" loading="lazy">
+          </button>
+          <figcaption>Final Blender render.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article id="tatami" class="chapter" data-shape="tatami" data-label="Tatami Room">
+      <div class="wrap chapter-grid">
+        <div class="chapter-text">
+          <p class="chapter-kicker"><span class="chapter-n">5/6</span> 3D, year 1</p>
+          <h2 class="chapter-title dots">Tatami Room</h2>
+          <p class="chapter-summary">A traditional Japanese room with a sweeping roof, built in Blender.</p>
+          <p>Paper-screen walls in a strict grid, a curved tiled roof and woven tatami mats on the floor. The project was about restraint: getting proportions, soft natural light and believable materials right without adding clutter.</p>
+          <dl class="facts">
+            <div><dt>What I did</dt><dd>Modelling, lighting, materials</dd></div>
+            <div><dt>Made with</dt><dd>Blender</dd></div>
+          </dl>
+          <button class="btn js-open" data-project="tatami">View render</button>
+        </div>
+        <figure class="chapter-photo wide">
+          <button class="photo-btn js-open" data-project="tatami" aria-label="Open the render of the Tatami Room">
+            <img src="assets/img/tatami.webp" alt="Render of a small Japanese building with grid paper walls and a curved roof" width="1600" height="900" loading="lazy">
+          </button>
+          <figcaption>Final Blender render.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article id="creature" class="chapter" data-shape="creature" data-label="Creature Program">
+      <div class="wrap chapter-grid">
+        <div class="chapter-text">
+          <p class="chapter-kicker"><span class="chapter-n">6/6</span> Creative coding, year 1</p>
+          <h2 class="chapter-title dots">Creature Program</h2>
+          <p class="chapter-summary">An animated beach where creatures react to your clicks and throw a ball to each other.</p>
+          <p>Written in Java with Processing and inspired by Lilo &amp; Stitch. Every creature is drawn from code, the ocean keeps moving, clicking a creature makes it react, and you can pass the red ball from one to the next.</p>
+          <dl class="facts">
+            <div><dt>What I did</dt><dd>Drawing, animation and interaction in code</dd></div>
+            <div><dt>Made with</dt><dd>Java, Processing</dd></div>
+          </dl>
+          <button class="btn js-open" data-project="creature">View screenshot</button>
+        </div>
+        <figure class="chapter-photo square">
+          <button class="photo-btn js-open" data-project="creature" aria-label="Open the screenshot of the Creature Program">
+            <img src="assets/img/creature.webp" alt="Three blue cartoon creatures on a beach with palm trees, one holding a red ball" width="724" height="714" loading="lazy">
+          </button>
+          <figcaption>Screenshot of the running sketch.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- About -->
+    <section id="about" class="about" data-shape="ledcube" data-label="About">
+      <div class="wrap">
+        <div class="about-text">
+          <h2 class="section-title dots">About</h2>
+          <p class="about-lead">I'm Oliwer, a second-year Creative Technology student at VU Amsterdam. I learn by building: I would rather get a rough prototype working than read about it first.</p>
+          <p>Most of my projects sit where hardware, code and design meet. Outside the studio I'm hooked on astrophysics (how stars, orbits and black holes move together), history and geopolitics. That's where the galaxy at the top of this page comes from. The cube behind this text is a nod to the first thing I ever soldered: an LED cube.</p>
+        </div>
+        <div class="skills">
+          <div class="skill">
+            <h3>Electronics</h3>
+            <ul><li>Soldering</li><li>Arduino</li><li>Sensors</li><li>Wireless messaging</li><li>LED matrices</li></ul>
+          </div>
+          <div class="skill">
+            <h3>Code</h3>
+            <ul><li>Java and Processing</li><li>JavaScript</li><li>HTML and CSS</li><li>Arduino C++</li><li>WebGL (this site)</li></ul>
+          </div>
+          <div class="skill">
+            <h3>3D</h3>
+            <ul><li>Blender modelling</li><li>Texturing and materials</li><li>Lighting and rendering</li><li>Playable browser builds</li></ul>
+          </div>
+          <div class="skill">
+            <h3>Design research</h3>
+            <ul><li>User interviews</li><li>Research questions</li><li>Research ethics</li><li>Prototyping to learn</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Journey -->
+    <section id="journey" class="journey" data-shape="path" data-label="Journey">
+      <div class="wrap">
+        <h2 class="section-title dots">Journey</h2>
+        <p class="section-intro">Where I started, where I am, and where I'm heading.</p>
+        <ol class="timeline">
+          <li class="done"><span class="when">Year 1</span><div><h3>LED cube</h3><p>Soldered a 3D grid of lights and programmed it to glow in patterns. My first real hardware build.</p></div></li>
+          <li class="done"><span class="when">Year 1</span><div><h3>A hand-coded portfolio</h3><p>The first version of this site, written from scratch in HTML, CSS and JavaScript and hosted on GitHub Pages.</p></div></li>
+          <li class="done"><span class="when">Year 1</span><div><h3>A learning roadmap</h3><p>Studied how Philips Hue and Oura build their products, then mapped the skills I need next, step by step, towards a Master's.</p><button class="link-btn js-open" data-project="roadmap">Open the roadmap</button></div></li>
+          <li class="done"><span class="when">Year 2</span><div><h3>Macropad</h3><p>Learned to solder small circuit boards and built my own keyboard.</p></div></li>
+          <li class="now"><span class="when">Now</span><div><h3>Interaction design research</h3><p>Learning to run interviews, ask sharp research questions and work ethically with participants.</p></div></li>
+          <li class="next"><span class="when">Next</span><div><h3>Networks and embedded systems</h3><p>How devices find each other and talk: networking, smart-home protocols and firmware in C.</p></div></li>
+          <li class="next"><span class="when">Goal</span><div><h3>A Master's in electrical or embedded engineering</h3><p>Building connected products from the circuit up.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact" data-shape="orbit" data-label="Contact">
+      <div class="wrap">
+        <h2 class="section-title dots">Say hello</h2>
+        <p class="section-intro">A question about a project, or an idea to build together? Send me a message.</p>
+        <a class="email" href="mailto:oliwer.gent@gmail.com">oliwer.gent@gmail.com</a>
+        <div class="contact-actions">
+          <button class="btn js-copy" data-copy="oliwer.gent@gmail.com">Copy email address</button>
+          <span class="copy-status" role="status"></span>
+        </div>
+        <ul class="elsewhere">
+          <li><a href="https://github.com/oliwergent-beep" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://oliwergent.itch.io" target="_blank" rel="noopener">itch.io</a></li>
+        </ul>
+        <footer class="footer">
+          <p>© 2026 Oliwer Gent</p>
+          <p>Built with plain HTML, CSS and WebGL. No frameworks.</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-inner">
+      <div class="viewer-stage">
+        <img id="viewer-img" alt="">
+      </div>
+      <div class="viewer-bar">
+        <div>
+          <h2 id="viewer-title" class="viewer-title"></h2>
+          <p id="viewer-caption" class="viewer-caption"></p>
+        </div>
+        <div class="viewer-controls">
+          <span id="viewer-count" class="viewer-count"></span>
+          <button class="icon-btn" id="viewer-prev" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
+          <button class="icon-btn" id="viewer-next" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
+          <button class="icon-btn" id="viewer-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg></button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="js/field.js?v=10"></script>
+  <script src="js/main.js?v=10"></script>
 </body>
 </html>
